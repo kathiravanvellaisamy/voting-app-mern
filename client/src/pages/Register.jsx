@@ -1,49 +1,69 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
-  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  // function to handle our controlled inputs
+  const handleChangeInput = (e) => {
+    setFormData((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle signup logic here
-    console.log(form);
-  };
+  console.log(formData);
 
+  const handleSubmit = () => {};
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={form.username}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+    <section className="register">
+      <div className="container register__container">
+        <h2>Sign Up</h2>
+        <form onSubmit={handleSubmit}>
+          <p className="form__error-message">any error from backend</p>
+
+          <input
+            type="text"
+            placeholder="Full Name"
+            name="fullName"
+            onChange={handleChangeInput}
+            autoComplete="true"
+            autoFocus
+          />
+          <input
+            type="email"
+            placeholder="Email Address"
+            name="email"
+            onChange={handleChangeInput}
+            autoComplete="true"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={handleChangeInput}
+            autoComplete="true"
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            name="password2"
+            onChange={handleChangeInput}
+            autoComplete="true"
+          />
+          <button type="submit" className="btn primary">
+            Sign Up
+          </button>
+          <p>
+            Already have an account? <Link to="/">Sign In</Link>
+          </p>
+        </form>
+      </div>
+    </section>
   );
 };
 

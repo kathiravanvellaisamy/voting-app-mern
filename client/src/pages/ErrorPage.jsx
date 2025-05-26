@@ -1,10 +1,27 @@
+import { useEffect } from "react";
+import NotFound from "../assets/404.jpg";
+import { useNavigate } from "react-router-dom";
+
 const ErrorPage = () => {
+  const navigate = useNavigate();
+
+  // redirect to previous page
+  useEffect(() => {
+    setTimeout(() => {
+      navigate(-1);
+    }, 6000);
+  });
+
   return (
-    <div style={{ textAlign: "center", marginTop: "2rem" }}>
-      <h1>Oops! Something went wrong.</h1>
-      <p>
-        The page you are looking for does not exist or an error has occurred.
-      </p>
+    <div className="errorPage">
+      <div className="errorPage__container">
+        <img src={NotFound} alt="Page Not Found" />
+        <h1>Oops! 404</h1>
+        <p>
+          Sorry, the page you are looking for does not exist.You will be
+          redirected to the previous page shortly...
+        </p>
+      </div>
     </div>
   );
 };
