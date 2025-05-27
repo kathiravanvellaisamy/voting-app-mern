@@ -1,8 +1,17 @@
+import { useState } from "react";
+import { elections as dummyElections } from "../data";
+import ResultElection from "../components/ResultElection";
+
 const Results = () => {
+  const [elections, setElections] = useState(dummyElections);
   return (
-    <div>
-      <h1>Results</h1>
-    </div>
+    <section className="results">
+      <div className="container results__container">
+        {elections.map((election) => (
+          <ResultElection key={election.id} {...election} />
+        ))}
+      </div>
+    </section>
   );
 };
 
